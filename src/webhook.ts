@@ -73,7 +73,12 @@ export function createWebhookHandler(githubApp: App) {
 
         console.log(`✓  PR #${pr.number} reviewed — ${repo.full_name}`);
       } catch (err) {
-        console.error(`✗  PR #${pr.number} review failed — ${repo.full_name}:`, err);
+        const message = err instanceof Error ? err.message : String(err);
+        const stack   = err instanceof Error ? err.stack   : undefined;
+        console.error(
+          `✗  PR #${pr.number} review failed — ${repo.full_name}: ${message}\n${stack ?? ''}`,
+          { pr: pr.number, repo: repo.full_name, error: String(err) },
+        );
       }
     });
   };

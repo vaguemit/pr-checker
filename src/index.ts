@@ -3,6 +3,22 @@ import Fastify from 'fastify';
 import { App } from '@octokit/app';
 import { createWebhookHandler } from './webhook.js';
 
+function validateEnv(): void {
+  const required = [
+    'GITHUB_APP_ID',
+    'GITHUB_PRIVATE_KEY',
+    'GITHUB_WEBHOOK_SECRET',
+    'ANTHROPIC_API_KEY',
+  ];
+  const missing = required.filter(key => !process.env[key]);
+  if (missing.length > 0) {
+    console.error(`[startup] Missing required environment variables: ${missing.join(', ')}`);
+    process.exit(1);
+  }
+}
+
+validateEnv();
+
 const server = Fastify({ logger: true });
 
 // Parse JSON but keep the raw body string for HMAC signature verification.

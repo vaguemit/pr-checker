@@ -17,7 +17,7 @@ export function parsePatch(patch: string): DiffLine[] {
       result.push({ line: ++n, content: raw.slice(1), added: true });
     } else if (raw.startsWith('-')) {
       // deleted line — no new-file line number
-    } else {
+    } else if (raw.length > 0) {
       result.push({ line: ++n, content: raw.slice(1), added: false });
     }
   }

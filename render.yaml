@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: claude-reviewer
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+    plan: free
+    envVars:
+      - key: GITHUB_APP_ID
+        generateValue: false
+        sync: false
+      - key: GITHUB_PRIVATE_KEY
+        generateValue: false
+        sync: false
+      - key: GITHUB_WEBHOOK_SECRET
+        generateValue: false
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        generateValue: false
+        sync: false
