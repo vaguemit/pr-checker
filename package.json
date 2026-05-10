@@ -1,0 +1,23 @@
+{
+  "name": "claude-reviewer",
+  "version": "1.0.0",
+  "description": "AI-powered GitHub PR reviewer using Claude",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsup src/index.ts --format esm --out-dir dist",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.37.0",
+    "@octokit/app": "^15.0.0",
+    "dotenv": "^16.4.0",
+    "fastify": "^4.28.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsup": "^8.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}
